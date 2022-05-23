@@ -1,11 +1,11 @@
 <?php
 
-class CrudConfig
+abstract class CrudConfig
 {
-    private $SKU;
-    private $Name;
-    private $Price;
-    private $Specification;
+    protected $SKU;
+    protected $Name;
+    protected $Price;
+    protected $Specification;
     protected $Conn;
 
     public function __construct($SKU = "", $Name = "", $Price = "", $Specification = "")
@@ -71,45 +71,14 @@ class CrudConfig
 
 
     /* GET */
-
-    public function fetchAll()
-    {
-
-        try {
-            $qry = $this->Conn->prepare("SELECT * FROM products ORDER BY SKU");
-            $qry->execute();
-            return $qry->fetchAll();
-        } catch (Exception $e) {
-            return $e->getMessage();
-        }
-    }
+    abstract public function fetchAll();
 
     /* POST */
-
-    public function insertData()
-    {
-
-        try {
-            $qry = $this->Conn->prepare("INSERT INTO products(SKU, Name, Price, Specification) VALUES(?,?,?,?)");
-            $qry->execute([$this->SKU, $this->Name, $this->Price, $this->Specification]);
-        } catch (Exception $e) {
-            echo $e->getMessage();
-        }
-    }
+    abstract public function insertData();
 
     /* DELETE */
+    abstract public function deleteData();
 
-    public function deleteData()
-    {
-
-        try {
-            $qry = $this->Conn->prepare("DELETE FROM products WHERE SKU = ?");
-            $qry->execute([$this->SKU]);
-            return $qry->getData();
-        } catch (Exception $e) {
-            return $e->getMessage();
-        }
-    }
 
     public function cors()
     {
@@ -117,7 +86,7 @@ class CrudConfig
         if (isset($_SERVER['HTTP_ORIGIN'])) {
             header("Access-Control-Allow-Origin: {$_SERVER['HTTP_ORIGIN']}");
             header('Access-Control-Allow-Credentials: true');
-            header('Access-Control-Max-Age: 86400');    // cache for 1 day
+            header('Access-Control-Max-Age: 86400');
         }
 
         if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
