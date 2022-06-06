@@ -1,6 +1,6 @@
 <?php
 
-require_once("crud.php");
+require_once("../models/crud.php");
 
 class Get extends CrudConfig
 {

@@ -2,19 +2,11 @@
 
 abstract class CrudConfig
 {
-    protected $SKU;
-    protected $Name;
-    protected $Price;
-    protected $Specification;
+
     protected $Conn;
 
-    public function __construct($SKU = "", $Name = "", $Price = "", $Specification = "")
+    public function __construct()
     {
-
-        $this->SKU = $SKU;
-        $this->Name = $Name;
-        $this->Price = $Price;
-        $this->Specification = $Specification;
 
         $this->Conn = new PDO(
             "mysql:host=localhost;dbname=id18927621_scandiweb_test",
@@ -22,51 +14,6 @@ abstract class CrudConfig
             "Gg5wQ@C|J!kR<Pvw",
             [PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC]
         );
-    }
-
-    /* SETTERS AND GETTERS */
-
-    # SKU
-    public function setSKU($SKU)
-    {
-        $this->SKU = $SKU;
-    }
-    public function getSKU()
-    {
-        return $this->SKU;
-    }
-
-
-    # Name
-    public function setName($Name)
-    {
-        $this->Name = $Name;
-    }
-    public function getName()
-    {
-        return $this->Name;
-    }
-
-
-    # Price
-    public function setPrice($Price)
-    {
-        $this->Price = $Price;
-    }
-    public function getPrice()
-    {
-        return $this->Price;
-    }
-
-
-    # Specification
-    public function setSpecification($Specification)
-    {
-        $this->Specification = $Specification;
-    }
-    public function getSpecification()
-    {
-        return $this->Specification;
     }
 
 

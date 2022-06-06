@@ -1,18 +1,20 @@
 <?php
 
-require_once("crud.php");
+require_once("../models/crud.php");
+require_once("../models/product.php");
 
 class Delete extends CrudConfig
 {
     public function deleteData()
     {
 
+        $product = new Product();
         if (isset($_GET['SKU'])) {
-            $this->setSKU($_GET['SKU']);
+            $product->setSKU($_GET['SKU']);
 
             try {
                 $qry = $this->Conn->prepare("DELETE FROM products WHERE SKU = ?");
-                $qry->execute([$this->SKU]);
+                $qry->execute([$product->SKU]);
                 return $qry->getData();
             } catch (Exception $e) {
                 return $e->getMessage();
