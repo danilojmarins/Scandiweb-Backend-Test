@@ -9,9 +9,9 @@ abstract class CrudConfig
     {
 
         $this->Conn = new PDO(
-            "mysql:host=localhost;dbname=id18927621_scandiweb_test",
-            "id18927621_root",
-            "Gg5wQ@C|J!kR<Pvw",
+            "mysql:host=localhost;dbname=scandiweb_test",
+            "root",
+            "",
             [PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC]
         );
     }
